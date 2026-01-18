@@ -20,18 +20,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4 playwright pandas
-          playwright install chromium
+          pip install requests beautifulsoup4 pandas
 
       - name: Run agent
         run: python run.py
 
-     - name: Commit updated CSV
-  run: |
-    git config --global user.name "github-actions"
-    git config --global user.email "actions@github.com"
-    git add data/jimny-weekly-report.csv
-    git commit -m "Weekly update" || echo "No changes to commit"
-    git push
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit updated CSV
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add data/jimny-weekly-report.csv
+          git commit -m "Weekly update" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/sickofworkingforaliving/Jimny_JC74W.git HEAD:main
