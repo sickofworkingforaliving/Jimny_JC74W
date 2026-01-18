@@ -1,1 +1,2 @@
-# TODO: UK scraper
+def fetch_uk_listings():
+    return []
